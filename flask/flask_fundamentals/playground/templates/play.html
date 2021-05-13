@@ -5,13 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Level 1</title>
-    <link rel="stylesheet" href="../static/styles/css.css">
-
-    <script>
-        $(document).ready(function(){
-            $(div).addClass(changeColor);
-        });
-    </script>
+    <link rel="stylesheet" href= "{{ url_for('static',filename='styles/css.css') }}">
 </head>
 <body>
     <main>
@@ -25,10 +19,9 @@
 
             {% if time > 0 :%}
                 {% for i in range(0,time) :%}
-                    <div></div>
-                {%endfor%}
+                    <div style="background-color: {{color}};"></div>
+                {%endfor%}  
             {%endif%}
-
         </aside>
     </main>
 </body>

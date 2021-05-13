@@ -12,7 +12,7 @@ def play_times(times):
 @app.route('/play/<times>/<colors>')
 def play_times_color(times,colors):
     print(colors)
-    return render_template('play_color.html',time = int(times) , color = colors)
+    return render_template('play.html',time = int(times) , color = colors)
 
 if __name__ == "__main__":
     app.run(debug=True)
