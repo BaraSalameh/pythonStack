@@ -1,0 +1,43 @@
+main{
+    margin: auto;
+    outline: 1px solid black;
+    width: 500px;
+    padding: 20px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+label{
+    margin: 10px;
+}
+
+
+
+div{
+    display: flex;
+    justify-content: space-between;
+    align-items:baseline;
+}
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+aside{
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+footer{
+    display: flex;
+    flex-direction: column;
+}
+
+#submitBTN{
+    width: 100px;
+    margin-left: 400px;
+}
