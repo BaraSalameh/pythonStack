@@ -1,0 +1,18 @@
+main{
+    margin: 0% auto;
+    display: inline-block;
+    outline: 1px solid black;
+}
+nav{
+    display: flex;
+}
+.white-div{
+    background-color: #ffffe0;
+    width: 50px;
+    height: 50px;
+}
+.green-div{
+    background-color: #556b2f;
+    width: 50px;
+    height: 50px;
+}

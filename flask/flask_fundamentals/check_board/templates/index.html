@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checker Board</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+</head>
+<body>
+    <main>
+        {% if rows == 0 and cols == 0: %}
+            {% for i in range(0,8): %}
+                {% if i%2 == 0: %}
+                    <nav>
+                        {% for j in range(0,8): %}
+                            {% if j%2 == 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                            {% if j%2 != 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+                {% if i%2 != 0: %}
+                    <nav>
+                        {% for j in range(0,8): %}
+                            {% if j%2 == 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                            {% if j%2 != 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if rows > 0 and cols == 0: %}
+            {% for i in range(0,rows): %}
+                {% if i %2 == 0: %}
+                    <nav>
+                        {% for j in range(0,8): %}
+                            {% if j%2 == 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                            {% if j%2 != 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+                {% if i%2 != 0: %}
+                    <nav>
+                        {% for j in range(0,8): %}
+                            {% if j%2 == 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                            {% if j%2 != 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if rows > 0 and cols > 0: %}
+            {% for i in range(0,rows): %}
+                {% if i %2 == 0: %}
+                    <nav>
+                        {% for i in range(0,cols): %}
+                            {% if i%2 == 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                            {% if i%2 != 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+                {% if i%2 != 0: %}
+                    <nav>
+                        {% for i in range(0,cols): %}
+                            {% if i%2 == 0: %}
+                                <div class="green-div" style="background-color: {{ second_color }};"></div>
+                            {% endif %}
+                            {% if i%2 != 0: %}
+                                <div class="white-div" style="background-color: {{ first_color }};"></div>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </main>
+</body>
+</html>
