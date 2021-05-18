@@ -1,0 +1,7 @@
+main{
+    width: 1000px;
+    height: 500px;
+    margin: 20px auto;
+    outline: 1px solid black;
+    padding: 30px;
+}
