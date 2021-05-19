@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <main>
+        <h1>Counter</h1>
+        {% if request.session.counter < 2 %}
+            <p>{{ request.session.counter }} last visit</p>
+        {% endif %}
+        
+        {% if request.session.counter > 1 %}
+            <p>{{ request.session.counter }} last visits</p>
+        {% endif %}
+        <p>{{ request.session.bigCounter }} all visits</p>
+        <form action="/destroy_session" method="POST">
+            {% csrf_token %}
+            <input type="submit" name="submit" value="RESET">
+        </form>
+        <br>
+        <form action="/plus_two" method="POST">
+            {% csrf_token %}
+            <input type="submit" name="plusSubmit" value="+2">
+        </form>
+        <br>
+        <form action="/plus" method="POST" class="last_form">
+            {% csrf_token %}
+            <input type="number" name="add" value="10" id="add">
+            
+            <input type="submit" name="addSubmit" value="ADD">
+        </form>
+    </main>
+</body>
+</html>
