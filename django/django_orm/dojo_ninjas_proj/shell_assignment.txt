@@ -1,0 +1,89 @@
+//Run the shell and import your models 
+
+(djangoPy3Env) C:\Users\asus\OneDrive\Desktop\Axsos\pythonStack\django\django_orm\dojo_ninjas_proj>python manage.py shell
+Python 3.9.5 (tags/v3.9.5:0a7dcbd, May  3 2021, 17:27:52) [MSC v.1928 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from dojo_ninjas_app.models import Dojo, Ninja
+>>>
+
+
+//Query: Create 3 new dojos
+
+>>> Dojo.objects.create(name = "Bara Salameh",city = "Ramallah", state="PA")
+>>> Dojo.objects.create(name = "Khalil Khalil",city = "Qalandya", state="PA")
+>>> Dojo.objects.create(name = "Omar Alhadar",city = "Betunia", state="PA")
+
+
+//Query: Create 3 more dojos
+
+>>> Dojo.objects.create(name= 'Albara Ibrahim',city = 'Biddya',state = 'P')
+<Dojo: Dojo object (4)>
+>>> Dojo.objects.create(name= 'Alaa Salameh',city = 'Nablus',state = 'P')
+<Dojo: Dojo object (5)>
+>>> Dojo.objects.create(name= 'Ali Jehad',city = 'Salfit',state = 'P')
+<Dojo: Dojo object (6)>
+
+
+//Query: Create 3 ninjas that belong to the first dojo
+
+>>> first_dojo = Dojo.objects.get(id=4)
+>>> Ninja.objects.create(first_name = 'jackie', last_name = 'chan', dojo_id=first_dojo)
+<Ninja: Ninja object (1)>
+>>> Ninja.objects.create(first_name = 'jit', last_name = 'li', dojo_id=first_dojo)
+<Ninja: Ninja object (2)>
+>>> Ninja.objects.create(first_name = 'bruce', last_name = 'li', dojo_id=first_dojo)
+<Ninja: Ninja object (3)>
+
+
+//Query: Create 3 ninjas that belong to the second dojo
+
+>>> second_dojo = Dojo.objects.get(id=5)
+>>> Ninja.objects.create(first_name = 'ip', last_name = 'man', dojo_id=second_dojo)
+<Ninja: Ninja object (4)>
+>>> Ninja.objects.create(first_name = 'han', last_name = 'sie', dojo_id=second_dojo)
+<Ninja: Ninja object (5)>
+>>> Ninja.objects.create(first_name = 'mortal', last_name = 'chin', dojo_id=second_dojo)
+<Ninja: Ninja object (6)>
+
+
+//Query: Create 3 ninjas that belong to the third dojo
+
+>>> third_dojo = Dojo.objects.get(id=6)
+>>> Ninja.objects.create(first_name = 'samuel', last_name = 'umtiti', dojo_id=third_dojo)
+<Ninja: Ninja object (7)>
+>>> Ninja.objects.create(first_name = 'leonel', last_name = 'messi', dojo_id=third_dojo)
+<Ninja: Ninja object (8)>
+>>> Ninja.objects.create(first_name = 'anton', last_name = 'griezman', dojo_id=third_dojo)
+<Ninja: Ninja object (9)>
+
+
+//Query: Retrieve all the ninjas from the first dojo
+
+>>> variable = Ninja.objects.filter(dojo_id=Dojo.objects.get(id=4))
+>>> for i in variable:
+...     print(i.first_name,i.last_name,i.dojo_id.id)
+
+
+//Query: Retrieve all the ninjas from the last dojo
+
+>>> variable = Ninja.objects.filter(dojo_id = Dojo.objects.get(id=6))
+>>>
+>>> for i in variable:
+...     print(i.first_name,i.last_name,i.dojo_id.id)
+...
+
+
+//Query: Retrieve the last ninja's dojo
+
+>>> Ninja.objects.last().dojo_id.name
+
+
+//Query: Create a new dojo
+
+>>> from dojo_ninjas_app.models import Dojo, Ninja
+>>> Dojo.objects.create(name = 'Mostafa Sara',city='Biddya',state='PA' )
+<Dojo: Dojo object (7)>
+>>>
+
+
