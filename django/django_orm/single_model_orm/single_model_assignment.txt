@@ -1,0 +1,86 @@
+//  make migrations
+(djangoPy3Env) C:\Users\asus\OneDrive\Desktop\Axsos\pythonStack\django\django_intro\single_model_orm>python manage.py makemigrations
+Migrations for 'users_app':
+  users_app\migrations\0001_initial.py
+    - Create model users
+
+// migrate
+(djangoPy3Env) C:\Users\asus\OneDrive\Desktop\Axsos\pythonStack\django\django_intro\single_model_orm>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, sessions, users_app
+Running migrations:
+  Applying contenttypes.0001_initial... OK
+  Applying auth.0001_initial... OK
+  Applying admin.0001_initial... OK
+  Applying admin.0002_logentry_remove_auto_add... OK
+  Applying admin.0003_logentry_add_action_flag_choices... OK
+  Applying contenttypes.0002_remove_content_type_name... OK
+  Applying auth.0002_alter_permission_name_max_length... OK
+  Applying auth.0003_alter_user_email_max_length... OK
+  Applying auth.0004_alter_user_username_opts... OK
+  Applying auth.0005_alter_user_last_login_null... OK
+  Applying auth.0006_require_contenttypes_0002... OK
+  Applying auth.0007_alter_validators_add_error_messages... OK
+  Applying auth.0008_alter_user_username_max_length... OK
+  Applying auth.0009_alter_user_last_name_max_length... OK
+  Applying auth.0010_alter_group_name_max_length... OK
+  Applying auth.0011_update_proxy_permissions... OK
+  Applying auth.0012_alter_user_first_name_max_length... OK
+  Applying sessions.0001_initial... OK
+  Applying users_app.0001_initial... OK
+
+
+//importing my class to do CRUD operations
+>>> from users_app.models import *
+
+
+//creatin three rows using the shell(create statement)
+>>> users.objects.create(first_name="bara",last_name="salameh",email_address="barasalameh90@gmail.com",age=23)
+<users: users object (1)>
+>>> users.objects.create(first_name="bara",last_name="zain",email_address="bz@hotmail.com",age=22)
+<users: users object (2)>
+>>> users.objects.create(first_name="khalil",last_name="khalil",email_address="khalilkhalil@gmail.com",age=21)
+<users: users object (3)>
+
+
+//retrieve all users
+>>> users.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'bara', 'last_name': 'salameh', 'email_address': 'barasalameh90@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>)}, 
+{'id': 2, 'first_name': 'bara', 'last_name': 'zain', 'email_address': 'bz@hotmail.com', 'age': 22, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 34, 421874, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 34, 421874, tzinfo=<UTC>)}, 
+{'id': 3, 'first_name': 'khalil', 'last_name': 'khalil', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>)}]>
+
+
+//retrieve the last row in the table
+>>> users.objects.last().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000023D0EE1DE50>, 'id': 3, 'first_name': 'khalil', 'last_name': 'khalil', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>)}
+
+
+//retrieve the first row in the table
+>>> users.objects.first().__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000023D0EE1DC40>, 'id': 1, 'first_name': 'bara', 'last_name': 'salameh', 'email_address': 'barasalameh90@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>)}
+
+
+//update the last name for user with id number 3 to pancakes
+>>> user = users.objects.get(id=3)
+>>> user.last_name = "pancakes"
+>>> user.save()
+>>> users.objects.get(id=3).__dict__
+{'_state': <django.db.models.base.ModelState object at 0x0000023D0EE1DF10>, 'id': 3, 'first_name': 'khalil', 'last_name': 'pancakes', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 32, 0, 499051, tzinfo=<UTC>)}
+
+
+//delete the row which has id number 2
+>>> user = users.objects.get(id=2)
+>>> user.delete()
+(1, {'users_app.users': 1})
+>>> users.objects.all().values()
+<QuerySet [{'id': 1, 'first_name': 'bara', 'last_name': 'salameh', 'email_address': 'barasalameh90@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'khalil', 'last_name': 'pancakes', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 32, 0, 499051, tzinfo=<UTC>)}]>
+
+
+//retrieve all rows ordered by names assending
+>>> users.objects.all().order_by('first_name').values()
+<QuerySet [{'id': 1, 'first_name': 'bara', 'last_name': 'salameh', 'email_address': 'barasalameh90@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>)}, {'id': 3, 'first_name': 'khalil', 'last_name': 'pancakes', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 32, 0, 499051, tzinfo=<UTC>)}]>
+
+
+//retrieve all rows ordered by names dessending
+>>> users.objects.all().order_by('-first_name').values()
+<QuerySet [{'id': 3, 'first_name': 'khalil', 'last_name': 'pancakes', 'email_address': 'khalilkhalil@gmail.com', 'age': 21, 'created_at': datetime.datetime(2021, 5, 20, 12, 18, 1, 288495, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 32, 0, 499051, tzinfo=<UTC>)}, {'id': 1, 'first_name': 'bara', 'last_name': 'salameh', 'email_address': 'barasalameh90@gmail.com', 'age': 23, 'created_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>), 'updated_at': datetime.datetime(2021, 5, 20, 12, 17, 2, 414271, tzinfo=<UTC>)}]>
