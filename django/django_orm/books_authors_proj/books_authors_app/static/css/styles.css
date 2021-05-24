@@ -1,0 +1,9 @@
+main{
+    margin: 20px 200px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+table{
+    padding-top: 20px;
+}

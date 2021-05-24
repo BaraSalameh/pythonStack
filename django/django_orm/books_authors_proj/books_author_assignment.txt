@@ -1,0 +1,155 @@
+Q1/ Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+
+>>> cSharp = Book.objects.create(title = "C Sharp", desc = "a powerfull language used to develop desktop and web applications")
+>>> java = Book.objects.create(title = "Java", desc = "an Object Oriented Programming language used to develop desktop apps")
+>>> python = Book.objects.create(title = "Python", desc = "powerfull language and easy one to develop web and scientefic researches")
+>>> PHP = Book.objects.create(title = "PHP", desc = "a language used to develop web and a great one to deal with databases")
+>>>  = Book.objects.create(title = "PHP", desc = "a language used to develop web and a great one to deal with databases")
+  File "<console>", line 1
+    = Book.objects.create(title = "PHP", desc = "a language used to develop web and a great one to deal with databases")
+IndentationError: unexpected indent
+>>> ruby = Book.objects.create(title = "Ruby", desc = "i don't know anything about this one!")
+
+
+Q2/ Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+
+jane_austen = Author.objects.create(first_name = "Jane", last_name= "Austen")
+>>> emily_dickinson = Author.objects.create(first_name = "Emily", last_name= "Dickinson")
+>>> fyodor_dostoevsky = Author.objects.create(first_name = "Fyodor", last_name= "Dostoevsky")
+>>> william_shakespeare = Author.objects.create(first_name = "William", last_name= "Shakespeare")
+>>> law_tzu = Author.objects.create(first_name = "Law", last_name= "Tzu")
+
+
+Q3/ Add a new text field in the authors table called 'notes'.
+
+>>> exit()
+
+(djangoPy3Env) C:\Users\asus\OneDrive\Desktop\Axsos\pythonStack\django\django_orm\books_authors_proj>python manage.py makemigrations
+Migrations for 'books_authors_app':
+  books_authors_app\migrations\0002_author_notes.py
+    - Add field notes to author
+
+(djangoPy3Env) C:\Users\asus\OneDrive\Desktop\Axsos\pythonStack\django\django_orm\books_authors_proj>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, books_authors_app, contenttypes, sessions
+Running migrations:
+  Applying books_authors_app.0002_author_notes... OK
+
+
+Q4/ Query: Change the name of the C Sharp book to C#
+
+>>> cSharp = Book.objects.filter(title = 'C Sharp')
+>>> cSharp.title = "C#"
+>>> print(cSharp.title)
+C#
+>>>cSharp.save()
+
+
+Q5/ Query: Change the first name of the 4th author to Bill
+
+>>> myAuthor = Author.objects.get(id=5)
+>>> myAuthor.first_name = "Bill"
+>>>
+>>> print(myAuthor.first_name)
+Bill
+>>>myAuthor.save()
+
+
+Q6/ Query: Assign the first author to the first 2 books
+
+myAuthor = Author.objects.get(id=2)
+>>>
+>>> myFirstBook = Book.objects.get(id=1)
+>>> mySecondBook = Book.objects.get(id=2)
+>>>
+>>> myAuthor.book_id.add(myFirstBook)
+>>> myAuthor.book_id.add(mySecondBook)
+
+
+Q7/ Query: Assign the second author to the first 3 books
+
+>>> secondAuthor = Author.objects.get(id=3)
+>>>
+>>> myThirdBook = Book.objects.get(id=3)
+>>>
+>>> myFirstBook.authors.add(secondAuthor)
+>>> mySecondBook.authors.add(secondAuthor)
+>>> myThirdBook.authors.add(secondAuthor)
+
+
+Q8/ Query: Assign the third author to the first 4 books
+
+>>> thirdAuthor = Author.objects.get(id=4)
+>>>
+>>> fourthBook = Book.objects.get(id=4)
+>>>
+>>> myFirstBook.authors.add(thirdAuthor)
+>>> mySecondBook.authors.add(thirdAuthor)
+>>> myThirdBook.authors.add(thirdAuthor)
+>>> fourthBook.authors.add(thirdAuthor)
+
+
+Q9/ Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+
+>>> fourthAuthor = Author.objects.get(id=5)
+>>> for i in Book.objects.all():
+...     i.authors.add(fourthAuthor)
+...
+>>>
+
+
+Q10/ Query: Retrieve all the authors for the 3rd book
+
+>>> thirdBook = Book.objects.get(id=3)
+>>> allTheAuthors = thirdBook.authors.all()
+>>> for i in allAuthors:
+...     print(i.first_name)
+...
+
+Jane
+Emily
+Fyodor
+Bill
+Law
+>>>
+
+
+Q11 / Query: Remove the first author of the 3rd book
+
+>>> thirdBook = Book.objects.get(id=3)
+>>> firstAuthor = thirdBook.authors.first()
+>>> thirdBook.authors.remove(firstAuthor)
+
+
+Q12/ Query: Add the 5th author as one of the authors of the 2nd book
+
+>>> fifthAuthor = Author.objects.get(id=6)
+>>> secondBook = Book.objects.get(id=2)
+>>>
+>>> secondBook.authors.add(fifthAuthor)
+
+
+Q13 / Query: Find all the books that the 3rd author is part of
+
+>>> thirdAuthor = Author.objects.get(id=4)
+>>> books = Book.objects.filter(authors = thirdAuthor)
+>>> for i in books:
+...     print(i.title)
+...
+C#
+Java
+Python
+PHP
+>>>
+
+
+Q14 / Query: Find all the authors that contributed to the 5th book
+
+>>> fifthBook = Book.objects.get(id=5)
+>>> allAuthors = Author.objects.filter(book_id = fifthBook)
+>>>
+>>> for i in allAuthors:
+...     print(i.first_name)
+...
+Bill
+>>>
