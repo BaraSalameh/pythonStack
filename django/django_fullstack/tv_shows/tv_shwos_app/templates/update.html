@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+</head>
+<body>
+    <a href="/" style="float: right;">Go Back</a>
+    <h2>Edit Show <p>{{ tvShow.id }}</p></h2>
+    <form action="/updateTvShow/{{ tvShow.id }}" method="POST">
+        {% csrf_token %}
+        <label for="title"><input type="text" name="title" id="title" value="{{ tvShow.title }}"></label>
+        <br>
+        <label for="network"><input type="text" name="network" id="network" value="{{ tvShow.network }}"></label>
+        <label for="release_date"><input type="date" name="release_date" id="release_date" value="{{ tvShow.release_date }}"></label>
+        <br>
+        <label for="description"><textarea name="description" id="description" cols="30" rows="10">{{ tvShow.description }}</textarea></label>
+        <br>
+        <input type="submit" value="Update">
+    </form>
+    <a href="/shows/{{ tvShow.id }}"></a>
+</body>
+</html>

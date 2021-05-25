@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        h2{
+            display: inline-block;
+        }
+        p{
+            display: inline-block;
+        }
+    </style>
+    
+</head>
+<body>
+    <a href="/" style="float: right;">Go Back</a>
+    <h2>TV Show: <p>{{ tvShow.id }}</p></h2>
+
+    <h5>Title: <p>{{ tvShow.title }}</p></h5>
+    
+    <h5>Network: <p>{{ tvShow.network }}</p></h5>
+
+    <h5>Release Date: <p>{{ tvShow.release_date }}</p></h5>
+    
+    <h5>Description: <p>{{ tvShow.description }}</p></h5>
+    
+    <h5>Last updated: <p>{{tvShow.updated_at}}</p></h5>
+    
+    <a href="/shows/{{ tvShow.id }}/edit">Edit</a> | <a href="/shows/{{ tvShow.id }}/destroy">Delete</a>
+</body>
+</html>

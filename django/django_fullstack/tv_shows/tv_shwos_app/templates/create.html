@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="/" style="float: right;">Go Back</a>
+    <h2>Add a New Show</h2>
+    <form action="/shows/setTvShow" method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" placeholder="Title">
+        <br><br>
+        <input type="text" name="network" placeholder="Network">
+        <input type="Date" name="release_date" placeholder="Release Date">
+        <br><br>
+        <textarea name="description" id="" cols="30" rows="10" placeholder="Description"></textarea>
+        <br><br>
+        <input type="submit" name="Create">
+    </form>
+</body>
+</html>
