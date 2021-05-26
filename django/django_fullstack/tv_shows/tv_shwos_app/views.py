@@ -1,5 +1,8 @@
+from django.core.checks import messages
+from django.db.models.expressions import Value
 from django.http import request
 from django.shortcuts import redirect, render
+from django.contrib import messages
 from . import models
 
 # Create your views here.
@@ -12,12 +15,21 @@ def index(request):
 # A method to handle '/shows' to render 'index.html'
 def showReadAll(request):
     context = {'tvShows': models.getAll()}
-
+    print(f"context content:{context['tvShows']}")
     return render(request,'index.html',context)
 
 # A method to handle '/shows/new' from index.html anchor to render 'create.html'
 def addANewShow(request):
     return render(request,'create.html')
+
+
+# A function that handle setTvShow method call to contact with the models method witch validate the data
+def validate_set_tv_show(posted_data):
+    return models.validate_set_tv_show(posted_data)
+
+# A function that handle setTvShow method call to contact with the models witch validate the title
+def validate_title(title):
+    return models.validate_title(title)
 
 # A method to handle '/shows/setTvShow' from create.html form to add a new row to database
 # and return that row id, then redirect to '/shows/<int:tvShowId>'
@@ -28,8 +40,20 @@ def setTvShow(requset):
         releaseDate = requset.POST['release_date']
         description = requset.POST['description']
 
-        tvShowId = models.setTvShow(title, network, release_date=releaseDate, description=description)
+        errors = validate_set_tv_show(requset.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(requset, value)
+            return redirect('/shows/new')
+        
+        title_erorrs = validate_title(requset.POST['title'])
+        if len(title_erorrs) > 0:
+            for key, value in title_erorrs.items():
+                messages.error(requset, value)
+            return redirect('/shows/new')
 
+        tvShowId = models.setTvShow(title, network, release_date=releaseDate, description=description)
+        messages.success(requset, "Tv Show successfully added")
         return redirect('/shows/'+str(tvShowId))
     return redirect('/shows/new')
 
@@ -38,7 +62,6 @@ def setTvShow(requset):
 # to render 'readOne.html'
 def showReadOne(requset, tvShowId):
     context = {'tvShow': models.getTvShow(tvShowId)}
-
     return render(requset, 'readOne.html', context)
 
 
@@ -68,8 +91,14 @@ def updateTvShow(request, tvShowId):
         releaseDate = request.POST['release_date']
         description = request.POST['description']
 
-        models.updateTvShow(tvShowId, title, network, releaseDate, description)
-
-        return redirect('/shows/'+str(tvShowId))
+        errors = validate_set_tv_show(request.POST)
+        if len(errors) > 0:
+            for key, value in errors.items():
+                messages.error(request, value)
+            return redirect('/shows/'+str(tvShowId)+'/edit')
+        else:
+            models.updateTvShow(tvShowId, title, network, releaseDate, description)
+            messages.success(request, "row updated successfully")
+            return redirect('/shows/'+str(tvShowId))
     return redirect('/shows/'+str(tvShowId)+'/edit')
 

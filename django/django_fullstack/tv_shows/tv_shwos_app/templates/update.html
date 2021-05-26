@@ -8,13 +8,22 @@
 </head>
 <body>
     <a href="/" style="float: right;">Go Back</a>
+    <br>
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li {% if message.tags %} class="{{ message.tags }}" {% endif %} > {{ message }} </li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    <br>
     <h2>Edit Show <p>{{ tvShow.id }}</p></h2>
     <form action="/updateTvShow/{{ tvShow.id }}" method="POST">
         {% csrf_token %}
-        <label for="title"><input type="text" name="title" id="title" value="{{ tvShow.title }}"></label>
+        <label for="title"><input type="text" name="title" id="title" value="{{ tvShow.title }}" required></label>
         <br>
-        <label for="network"><input type="text" name="network" id="network" value="{{ tvShow.network }}"></label>
-        <label for="release_date"><input type="date" name="release_date" id="release_date" value="{{ tvShow.release_date }}"></label>
+        <label for="network"><input type="text" name="network" id="network" value="{{ tvShow.network }}" required></label>
+        <label for="release_date"><input type="date" name="release_date" id="release_date" value="{{ tvShow.release_date }}" required></label>
         <br>
         <label for="description"><textarea name="description" id="description" cols="30" rows="10">{{ tvShow.description }}</textarea></label>
         <br>
