@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the number</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <main>
+        <p>I am thinking of a number between 1 and 100 Take a guess!</p>
+        <h3>Welcome to the great number game!</h3>
+            {% if winner == 1  %}
+                <div class="green_color">
+                    <form action="/play_again" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" name="play_again" value="Play again">
+                    </form>
+                </div>
+            {% endif %}
+            {% if too_low == 1 %}
+                <div class="red_color">
+                    <h1>Too low</h1>
+                </div>
+            {% endif %}
+            {% if too_high == 1 %}
+                <div class="red_color">
+                    <h1>Too High</h1>
+                </div>
+            {% endif %}
+        <form action="/check" method="POST">
+            {% csrf_token %}
+            <input type="number" name="number" value="50">
+            <br>
+            <input type="submit" value="Guess">
+        </form>
+    </main>
+</body>
+</html>
