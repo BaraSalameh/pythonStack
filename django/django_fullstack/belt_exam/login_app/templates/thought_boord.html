@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="thought_boord_header">
+        <a href="/thoughts">Dashboard</a>
+        <a href="/logout">Logout</a>
+    </div>
+    <div class="thought_boord_main">
+        <h3>{{ thought.user_id.first_name }} says</h3>
+        <div class="thought_div">
+            <p>{{ thought.thought }}</p>
+        </div>
+        <div class="like_div">
+            <form action="/like" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="thought_id" value="{{ thought.id }}">
+                <input type="submit" value="Like" id="like">
+            </form>
+            <form action="/unlike" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="thought_id" value="{{ thought.id }}">
+                <input type="submit" value="Unlike" id="unlike">
+            </form>
+        </div>
+    </div>
+    <div class="thought_boord_footer">
+        <!-- if there is likes -->
+        <h3>People who liked this thought</h3>
+        <!-- <table>
+            <thead>
+                <td>First Name</td>
+                <td>Last Name</td>
+            </thead>
+            <tbody>
+               {% for user in users %}
+                    <tr>
+                        <td>{{ user.first_name }}</td>
+                        <td> {{ user.last_name }} </td>
+                    </tr>
+               {% endfor %}
+            </tbody>
+        </table> -->
+        <table class="table table-dark">
+            <thead>
+              <tr>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.first_name }}</td>
+                        <td> {{ user.last_name }} </td>
+                    </tr>
+               {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+main{
+    display: flex;
+    justify-content: space-around;
+}
+.register_div{
+    padding: 50px;
+    width: 350px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+.login_div{
+    padding: 50px;
+    width: 350px;
+    display: inline-flex;
+    flex-direction: column;
+}
+
+header{
+    padding: 0 20px;
+}
+
+.logout{
+    display: flex;
+    justify-content: space-between;
+}
+
+#thought_input{
+    width: 300px;
+}
+
+#add_thought_button{
+    background-color: #2a74dd;
+}
+
+.section{
+    display: flex;
+    flex-direction: row;
+}
+
+.thought_div{
+    border: 1px solid black;
+    padding: 10px;
+    display: inline-flex;
+}
+
+a{
+    display: block;
+}
+.thought_boord_header{
+    display: flex;
+    float: right;
+}
+
+.thought_boord_header a{
+    margin: 10px;
+}
+
+.like_div{
+    display: flex;
+    flex-direction: row;
+}
+
+.like_div input{
+    margin: 3px 34px;
+}
+
+#like{
+    background-color: #009e0f;
+}
+
+#unlike{
+    background-color: #ff9900;
+}
+
+.thought_boord_footer{
+    margin-top: 50px;
+    width: 500px;
+}
